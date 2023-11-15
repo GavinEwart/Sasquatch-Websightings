@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <title>Report Sasquatch Sighting</title>
+</head>
+
+<body style="background-color: #f8f9fa;">
+    <header class="bg-dark text-light p-3 d-flex align-items-center">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="{{ url_for('static', filename='imgs/sasquatch_logo.png') }}" alt="Sasquatch Logo"
+                class="sasquatch-logo">
+            <h1 class="justify-content-start m-0 sasquatch-header">Sasquatch Websightings</h1>
+            <div class="justify-content-end">
+                <button class="btn btn-success mr-2">
+                    <a href="{{ ('/sightings') }}" class="text-light">Home</a>
+                </button>
+                <button class="btn btn-danger">
+                    <a href="{{ ('/logout') }}" class="text-light">Logout</a>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <h2 class="sasquatch-header">Report Sasquatch Sighting</h2>
+        {% with messages = get_flashed_messages(category_filter=['error']) %}
+            {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <form action="{{ url_for('create_sasquatch_sighting') }}" method="post">
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date of Sighting:</label>
+                <input type="date" class="form-control" id="date" name="date_of_sighting" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sasquatches">Number of Sasquatches:</label>
+                <input type="number" class="form-control" id="sasquatches" name="number_of_sasquatches" required>
+            </div>
+
+            <div class="form-group">
+                <label for="whatHappened">What Happened:</label>
+                <textarea class="form-control" id="whatHappened" name="what_happened" rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Report Sasquatch Sighting</button>
+        </form>
+    </main>
+</body>
+
+</html>

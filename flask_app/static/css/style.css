@@ -1,0 +1,32 @@
+body {
+    background-color: #f8f9fa; 
+}
+
+.sasquatch-logo {
+    width: 100px; 
+    height: auto;
+}
+
+.sasquatch-card {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #ffffff; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000000; 
+}
+
+.sasquatch-header {
+    text-align: center;
+    color: #3b5998; 
+}
+
+.sasquatch-btn {
+    background-color: #3b5998; 
+    color: #ffffff; 
+}
+
+.sasquatch-btn:hover {
+    background-color: #2a3f5d; 
+}

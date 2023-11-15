@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sasquatch-card">
+            <img src="static\imgs\sasquatch_logo.png" alt="Sasquatch Logo" class="sasquatch-logo">
+            <h1 class="sasquatch-header">Sasquatch Websightings Login</h1>
+            {% with messages = get_flashed_messages(category_filter=['hacker']) %}
+                {% if "You thought I didn't protect against that?" in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        You thought I didn't protect against that?
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <main>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 bg-dark text-light">
+                            <h2>Login</h2>
+                            {% with messages = get_flashed_messages(category_filter=['login', 'hacker']) %}
+                                {% if messages %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {% for message in messages %}
+                                            {{ message }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
+                            <form action="/login" method="POST">
+                                <div class="form-group">
+                                    <label for="login_email">Email: </label>
+                                    <input type="text" class="form-control" id="login_email" name="email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="login_password">Password: </label>
+                                    <input type="password" class="form-control" id="login_password" name="password">
+                                </div>
+
+                                <button type="submit" class="btn sasquatch-btn btn-block">Login</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6 bg-dark text-light">
+                            <h2>Register</h2>
+                            {% with messages = get_flashed_messages(category_filter=['success']) %}
+                                {% if messages %}
+                                    <div class="alert alert-success" role="alert">
+                                        {% for message in messages %}
+                                            {{ message }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
+                            {% with messages = get_flashed_messages(category_filter=['register']) %}
+                                {% if messages %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {% for message in messages %}
+                                            {{ message }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
+                            <form action="/register" method="POST">
+                                <div class="form-group">
+                                    <label for="register_fname">First Name: </label>
+                                    <input type="text" class="form-control" id="register_fname" name="first_name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="register_lname">Last Name: </label>
+                                    <input type="text" class="form-control" id="register_lname" name="last_name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="register_email">Email: </label>
+                                    <input type="email" class="form-control" id="register_email" name="email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="register_password">Password: </label>
+                                    <input type="password" class="form-control" id="register_password" name="password">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="confirm_password">Confirm Password: </label>
+                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                                </div>
+
+                                <button type="submit" class="btn sasquatch-btn btn-block">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- Format for adding images -->
+<!-- <img src="{{ url_for('static', filename='images/img.png') }}"> -->

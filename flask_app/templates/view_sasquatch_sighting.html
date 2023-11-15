@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <title>Sasquatch Recipe Details</title>
+</head>
+
+<body style="background-color: #f8f9fa;">
+    <header class="bg-dark text-light p-3 d-flex align-items-center">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="{{ url_for('static', filename='imgs/sasquatch_logo.png') }}" alt="Sasquatch Logo"
+                class="sasquatch-logo">
+            <h1 class="justify-content-start m-0 sasquatch-header">Sasquatch Recipes</h1>
+            <div class="justify-content-end">
+                <button class="btn btn-success mr-2">
+                    <a href="{{ ('/sightings') }}" class="text-light">Home</a>
+                </button>
+                <button class="btn btn-danger">
+                    <a href="{{ url_for('logout') }}" class="text-light">Logout</a>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Sasquatch Sighting</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">{{ sasquatch.location }} on {{ sasquatch.date_of_sighting }}</h2>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><strong>What Happened:</strong> {{ sasquatch.what_happened }}</p>
+                <p class="card-text"><strong>Number Of Sasquatches:</strong> {{ sasquatch.number_of_sasquatches }}</p>
+                <h3 class="card-text">{{ sasquatch.user_id }}</h3>
+        </div>
+    </div>
+</body>
+
+</html>

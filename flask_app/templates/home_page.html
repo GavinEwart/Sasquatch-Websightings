@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <title>Homepage</title>
+</head>
+
+<body style="background-color: #f8f9fa;">
+    <header class="bg-dark text-light p-3 d-flex align-items-center">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="{{ url_for('static', filename='imgs/sasquatch_logo.png') }}" alt="Sasquatch Logo"
+                class="sasquatch-logo">
+            <h1 class="justify-content-start m-0 sasquatch-header">Sasquatch Websightings</h1>
+            <div class="justify-content-end">
+                <button class="btn btn-success mr-2">
+                    <a href="{{ ('/sasquatch_sightings/new') }}" class="text-light">Create</a>
+                </button>
+                <button class="btn btn-danger">
+                    <a href="{{ ('/logout') }}" class="text-light">Logout</a>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <h2 class="sasquatch-header">Welcome, {{ user_in_db.first_name }}</h2>
+        {% with messages = get_flashed_messages(category_filter=['error']) %}
+            {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% with messages = get_flashed_messages(category_filter=['success']) %}
+            {% if messages %}
+                <div class="alert alert-success" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        {% for sighting in sightings %}
+        <div class="card mt-3">
+            <div class="card-body d-flex justify-content-between">
+                <div>
+                    <h5 class="card-title">{{ sighting.location }}</h5>
+                    <p class="card-text">
+                        Sceptic Count: <br>
+                        Date of Sighting: {{ sighting.date_of_sighting }}<br>
+                        Reported By: {{ sighting.reported_by.first_name }} {{ sighting.reported_by.last_name }}
+                    </p>
+                </div>
+                <div>
+                    <a href="{{ url_for('view_sasquatch_sighting', sasquatch_id=sighting.sighting_table_id) }}" class="btn btn-primary">View</a>
+                    {% if user_in_db.id == sighting.user_id %}
+                        <a href="{{ url_for('edit_sasquatch_sighting', sasquatch_id=sighting.sighting_table_id) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ url_for('delete_sighting', sasquatch_id=sighting.sighting_table_id) }}" class="btn btn-danger">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+</body>
+
+</html>
